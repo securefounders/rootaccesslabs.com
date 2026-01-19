@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RootAccess Labs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #c1384a 0%, #8b2838 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 22px;
+            background: #fff;
+            clip-path: polygon(30% 0%, 70% 0%, 70% 60%, 100% 60%, 50% 100%, 0% 60%, 30% 60%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .apply-btn {
+            background: #c1384a;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .apply-btn:hover {
+            background: #a12d3d;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+
+        .section {
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-wide {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+
+        .section p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .section ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .section li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            font-size: 18px;
+        }
+
+        .section li::before {
+            content: '•';
+            position: absolute;
+            left: 10px;
+            color: #c1384a;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .dark-section {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 80px 40px;
+        }
+
+        .dark-section h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dark-section p {
+            color: #ddd;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .philosophy-card {
+            background: #fff;
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .philosophy-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .philosophy-card p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 4px solid #c1384a;
+            margin: 40px 0;
+        }
+
+        .highlight-box h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .highlight-box p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: #fff3e0;
+            padding: 35px;
+            border-radius: 8px;
+            border-left: 4px solid #ffbd2e;
+            margin: 40px 0;
+        }
+
+        .info-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .info-box p {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .warning-box {
+            background: #ffe5e5;
+            padding: 35px;
+            border-radius: 8px;
+            border-left: 4px solid #c1384a;
+            margin: 40px 0;
+        }
+
+        .warning-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .warning-box ul {
+            margin-top: 15px;
+        }
+
+        .closing-statement {
+            text-align: center;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+
+        .closing-statement h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .closing-statement p {
+            font-size: 20px;
+            color: #555;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .section h2 {
+                font-size: 28px;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section, .section-wide {
+                padding: 60px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span><strong>ROOTACCESS</strong> LABS</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="apply.html" class="apply-btn">APPLY NOW</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>About RootAccess Labs</h1>
+    </section>
+
+    <section class="section">
+        <h2>Who We Are</h2>
+        <p>RootAccess Labs (RAL) is a cybersecurity training and enablement platform focused on building real-world security capability.</p>
+        <p>We exist to train people to understand how attacks actually happen, how systems fail in practice, and how security decisions are made under real-world conditions — not how security is presented in textbooks or exams.</p>
+    </section>
+
+    <section class="section" style="background: #f9f9f9;">
+        <h2>Why RootAccess Labs Exists</h2>
+        <p>Cybersecurity education has increasingly become:</p>
+        <ul>
+            <li>Certification-driven</li>
+            <li>Tool-focused</li>
+            <li>Theory-heavy</li>
+        </ul>
+        <p style="margin-top: 30px;">While this creates familiarity, it often fails to build practical judgment.</p>
+        <p>In real environments, security failures rarely occur because someone did not know a tool. They occur because assumptions were wrong, attack paths were misunderstood, or decisions were made without sufficient context.</p>
+        <p style="margin-top: 30px; font-weight: 600; font-size: 20px;">RootAccess Labs was created to address this gap.</p>
+    </section>
+
+    <section class="section">
+        <h2>Our Philosophy</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">RootAccess Labs is built on a small set of core principles:</p>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <h3>Attacker-First Thinking</h3>
+                <p>Security is best understood by first understanding how attackers think, move, and adapt.</p>
+            </div>
+
+            <div class="philosophy-card">
+                <h3>Attack Paths Over Isolated Issues</h3>
+                <p>Real incidents are the result of chained weaknesses, not single vulnerabilities.</p>
+            </div>
+
+            <div class="philosophy-card">
+                <h3>Judgment Over Memorization</h3>
+                <p>Tools change constantly. The ability to reason under uncertainty does not.</p>
+            </div>
+
+            <div class="philosophy-card">
+                <h3>Hands-On by Design</h3>
+                <p>Learning happens through realistic scenarios, experimentation, and feedback — not passive consumption.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How We Train</h2>
+        <p>Training at RootAccess Labs is:</p>
+        <ul>
+            <li>Instructor-led</li>
+            <li>Lab-heavy</li>
+            <li>Scenario-driven</li>
+            <li>Conducted in small, focused cohorts</li>
+        </ul>
+        <p style="margin-top: 30px;">Progress is measured by understanding and execution, not completion or attendance.</p>
+        <p style="font-weight: 600;">There are no shortcuts, guarantees, or passive tracks.</p>
+    </section>
+
+    <section class="section" style="background: #f9f9f9;">
+        <h2>Who We Work With</h2>
+        <p>RootAccess Labs is designed for:</p>
+        <ul>
+            <li>Serious students pursuing cybersecurity careers</li>
+            <li>Engineers transitioning into security roles</li>
+            <li>Early-career professionals seeking depth</li>
+            <li>Defenders who want to understand attacker behavior</li>
+        </ul>
+        <p style="margin-top: 30px; font-style: italic;">It is not designed for casual learners or shortcut-driven programs.</p>
+    </section>
+
+    <section class="section">
+        <h2>Alignment With Global Practice</h2>
+        <p>The curriculum at RootAccess Labs reflects how modern security teams operate globally.</p>
+        
+        <div class="highlight-box">
+            <h3>The training is:</h3>
+            <ul>
+                <li>Tool-agnostic by design</li>
+                <li>Focused on attacker behavior and risk</li>
+                <li>Grounded in real incident workflows</li>
+                <li>Oriented toward continuous learning and improvement</li>
+            </ul>
+            <p style="margin-top: 20px; margin-bottom: 0;">This alignment is practical and conceptual, not exam-driven.</p>
+        </div>
+    </section>
+
+    <section class="section" style="background: #f9f9f9;">
+        <h2>Relationship to Secure Founders</h2>
+        
+        <div class="info-box">
+            <h3>RootAccess Labs operates independently as a training and enablement platform.</h3>
+            <p>Secure Founders is a separate cybersecurity advisory firm focused on founder-level security and adversarial work. Insights from real-world security practice inform our training philosophy, but the two serve different purposes and audiences.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>What We Do Not Promise</h2>
+        
+        <div class="warning-box">
+            <h3>RootAccess Labs does not offer:</h3>
+            <ul>
+                <li>Guaranteed placements</li>
+                <li>Shortcut certifications</li>
+                <li>Overnight expertise</li>
+            </ul>
+            <p style="margin-top: 25px; margin-bottom: 0; font-weight: 600;">We focus on building capability. Outcomes follow from effort.</p>
+        </div>
+    </section>
+
+    <section class="closing-statement">
+        <h2>Cybersecurity is not about knowing more tools.<br>It is about understanding how systems fail.</h2>
+        <p style="margin-top: 30px;">RootAccess Labs exists to teach that understanding.</p>
+    </section>
+
+    <footer>
+        <p>© 2026 RootAccess Labs. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#legal">Legal Disclaimer</a>
+            <a href="#linkedin">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>

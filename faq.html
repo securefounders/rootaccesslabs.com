@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - RootAccess Labs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #c1384a 0%, #8b2838 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 22px;
+            background: #fff;
+            clip-path: polygon(30% 0%, 70% 0%, 70% 60%, 100% 60%, 50% 100%, 0% 60%, 30% 60%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .apply-btn {
+            background: #c1384a;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .apply-btn:hover {
+            background: #a12d3d;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 80px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .category {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #c1384a;
+        }
+
+        .faq-item {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-toggle {
+            color: #c1384a;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            margin-top: 20px;
+            color: #555;
+            font-size: 17px;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-answer p {
+            margin-bottom: 15px;
+        }
+
+        .faq-answer ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .faq-answer li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .faq-answer li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #c1384a;
+            font-weight: bold;
+        }
+
+        .final-note {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 8px;
+        }
+
+        .final-note h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .final-note p {
+            font-size: 18px;
+            color: #ddd;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 15px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            background: #c1384a;
+            color: white;
+            padding: 18px 36px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background: #a12d3d;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #333;
+            padding: 18px 36px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .btn-secondary:hover {
+            border-color: #c1384a;
+            color: #c1384a;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .category-title {
+                font-size: 26px;
+            }
+
+            .faq-question {
+                font-size: 18px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span><strong>ROOTACCESS</strong> LABS</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="apply.html" class="apply-btn">APPLY NOW</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about RootAccess Labs, our programs, and what to expect.</p>
+    </section>
+
+    <section class="section">
+        <!-- GENERAL -->
+        <div class="category">
+            <h2 class="category-title">General</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What is RootAccess Labs?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>RootAccess Labs (RAL) is a cybersecurity training and enablement platform focused on building real-world security capability. The training emphasizes attacker thinking, realistic scenarios, and practical judgment over theory or certifications.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How is RootAccess Labs different from other training institutes?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Most programs focus on tools, certifications, or predefined labs.</p>
+                    <p>RootAccess Labs focuses on:</p>
+                    <ul>
+                        <li>How attacks actually unfold</li>
+                        <li>How systems fail in practice</li>
+                        <li>How security decisions are made under uncertainty</li>
+                    </ul>
+                    <p>The emphasis is on thinking and execution, not memorization.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is RootAccess Labs an institute or coaching center?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>No.</strong></p>
+                    <p>RootAccess Labs operates as a selective training and enablement platform, not a mass-market institute. Cohorts are intentionally small to maintain depth and quality.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROGRAMS & LEARNING -->
+        <div class="category">
+            <h2 class="category-title">Programs & Learning</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What programs do you offer?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>RootAccess Labs currently offers:</p>
+                    <ul>
+                        <li>SOC & Blue Team Operations (2 months)</li>
+                        <li>Ethical Hacking (3 months)</li>
+                        <li>Vulnerability Assessment & Penetration Testing – VAPT (3 months)</li>
+                        <li>Combined Track: Ethical Hacking + VAPT (4 months)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Are the programs beginner-friendly?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Some programs are suitable for beginners, but all programs require seriousness and effort.</p>
+                    <p>Advanced tracks assume prior foundational knowledge. Applicants are evaluated for readiness during the application process.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is the curriculum day-wise or module-wise?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The curriculum is <strong>module-wise</strong>.</p>
+                    <p>Modules reflect learning progression and real-world workflows. Day-wise schedules exist only internally for instructors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is the training hands-on?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Yes.</strong></p>
+                    <p>All programs are instructor-led and lab-heavy. Concepts are reinforced through realistic scenarios, exercises, and guided practice.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is the training live or recorded?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Training is primarily <strong>live and instructor-led</strong>.</p>
+                    <p>Recordings, if provided, are supplementary and not a replacement for live participation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What schedule do classes follow?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Schedules vary by program and cohort. Typically, sessions are held on weekends or weekday evenings to accommodate working professionals.</p>
+                    <p>Specific timings are shared during the application and onboarding process.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMISSIONS & APPLICATION -->
+        <div class="category">
+            <h2 class="category-title">Admissions & Application</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Why do I need to apply?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Admission is selective.</p>
+                    <p>The application helps ensure the program is a good fit — for you and for RootAccess Labs.</p>
+                    <p><strong>This is not an enrollment form.</strong></p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What do you look for in an application?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We evaluate:</p>
+                    <ul>
+                        <li>Intent and seriousness</li>
+                        <li>Readiness for hands-on learning</li>
+                        <li>Willingness to put in effort</li>
+                        <li>Alignment with program expectations</li>
+                    </ul>
+                    <p>Background matters less than commitment and mindset.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you reject applications?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Yes.</strong></p>
+                    <p>Not all applicants are accepted. Some may be deferred or advised to prepare further before reapplying.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    When do new cohorts start?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Cohort start dates are announced based on application volume and program readiness. Accepted applicants are notified in advance with sufficient time to prepare.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUTCOMES & EXPECTATIONS -->
+        <div class="category">
+            <h2 class="category-title">Outcomes & Expectations</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you provide certificates?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Certificates may be provided for completion, but they are not the focus.</p>
+                    <p>Capability and understanding matter more than credentials.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you guarantee placements or jobs?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>No.</strong></p>
+                    <p>RootAccess Labs does not offer guaranteed placements, referrals, or job assurances.</p>
+                    <p>The focus is skill and capability development.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How many hours per week are required?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>This varies by program, but all programs require:</p>
+                    <ul>
+                        <li>Regular attendance</li>
+                        <li>Hands-on practice outside sessions</li>
+                        <li>Independent effort</li>
+                    </ul>
+                    <p>Learners unwilling to commit time outside sessions may struggle.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is this suitable if I already work full-time?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, for motivated learners — but it is demanding.</p>
+                    <p>Time management and consistent effort are essential.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOOLS, CERTIFICATIONS & STANDARDS -->
+        <div class="category">
+            <h2 class="category-title">Tools, Certifications & Standards</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is the training aligned with international standards?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The curriculum reflects globally accepted security practices and real-world workflows.</p>
+                    <p>It is not designed around certification exams or compliance checklists.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Will I learn specific tools?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You will use tools as part of learning, but training is tool-agnostic by design.</p>
+                    <p>The emphasis is on understanding concepts that transfer across tools and environments.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Does this prepare me for certifications like CEH, OSCP, or Security+?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>While the training covers concepts that overlap with major certifications, the curriculum is not exam-focused.</p>
+                    <p>The goal is to build foundational understanding that makes certifications easier to pursue independently if desired.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- POLICIES & MISCELLANEOUS -->
+        <div class="category">
+            <h2 class="category-title">Policies & Miscellaneous</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer refunds?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Refund and cancellation policies are shared during onboarding and depend on the program stage. Please review them carefully before committing.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How can I contact you?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can reach out through the Contact or Apply page.</p>
+                    <p>All serious inquiries are reviewed and responded to.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer corporate training?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Corporate and organizational training may be available on a case-by-case basis. Please reach out through our contact page with details about your requirements.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-note">
+            <h2>Final Note</h2>
+            <p>If you are looking for shortcuts, guarantees, or low-effort programs, RootAccess Labs may not be the right fit.</p>
+            <p>If you are serious about understanding how security actually works, you are welcome to apply.</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Begin Your Cybersecurity Journey?</h2>
+        <div class="cta-buttons">
+            <a href="apply.html" class="btn-primary">APPLY NOW</a>
+            <a href="contact.html" class="btn-secondary">CONTACT US</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 RootAccess Labs. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#legal">Legal Disclaimer</a>
+            <a href="#linkedin">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
