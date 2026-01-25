@@ -465,7 +465,7 @@
             <div class="logo">
                 <div class="logo-icon"></div>
                 <span><strong>ROOTACCESS</strong> LABS</span>
-                </div>
+            </div>
             <ul class="nav-links">
                <li><a href="index.html">Home</a></li>
                 <li><a href="programs.html">Programs</a></li>
@@ -834,18 +834,24 @@
     </footer>
 
     <!-- Hidden iframe for form submission -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {document.getElementById('successMessage').classList.add('show'); document.getElementById('applicationForm').reset(); document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });}"></iframe>
 
     <script>
+        var submitted = false;
+        
         // Handle form submission
         document.getElementById('applicationForm').addEventListener('submit', function(e) {
-            // Show success message
+            var submitBtn = this.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            submitted = true;
+            
+            // Re-enable button after 3 seconds
             setTimeout(function() {
-                document.getElementById('successMessage').classList.add('show');
-                document.getElementById('applicationForm').reset();
-                // Scroll to success message
-                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 1000);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
+            }, 3000);
         });
     </script>
 </body>
